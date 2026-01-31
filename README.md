@@ -1,7 +1,7 @@
 #  Customer Retention Intelligence System (CRIS)
 
 ### **Executive Summary**
-A full-stack Data Science solution designed to predict customer churn and recommend retention strategies. This project utilizes a **Random Forest Classifier (SMOTE-enhanced)** to identify high-risk customers with **82% accuracy** and deploys the model via an interactive **Streamlit Dashboard** for real-time decision-making.
+A full-stack Data Science solution designed to predict customer churn and recommend retention strategies. This project utilizes a **Random Forest Classifier (SMOTE-enhanced)** to identify high-risk customers with **79% Recall** and deploys the model via an interactive **Streamlit Dashboard** for real-time decision-making.
 
 ---
 
