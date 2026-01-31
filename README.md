@@ -5,6 +5,13 @@ A full-stack Data Science solution designed to predict customer churn and recomm
 
 ---
 
+## 📂 Data Source
+The dataset used for this project was sourced from Kaggle.
+* **Original Source:** [Telco Customer Churn - Kaggle](https://www.kaggle.com/blastchar/telco-customer-churn)
+* **Note:** A cleaned version of the dataset is included in this repository (`telecom_churn.csv`) to ensure the application runs seamlessly without requiring external downloads.
+
+---
+
 ###  Business Impact
 * **Problem:** Telecom provider facing high customer attrition (26.5% churn rate).
 * **Solution:** Predictive model to flag at-risk customers before they leave.
