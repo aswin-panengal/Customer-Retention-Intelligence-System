@@ -26,11 +26,10 @@ A full-stack Data Science solution designed to predict customer churn and recomm
 
 ###  Key Features
 1.  **Real-Time Prediction:** Instantly calculates Churn Probability (0-100%).
-2.  **Risk Segmentation:** Classifies users as "Safe" or "High Risk" based on a 30% threshold.
+2.  **Risk Segmentation:** Implements a Traffic Light System (Low, Moderate, High Risk) to prioritize retention efforts effectively.
 3.  **Automated Strategy:** Generates a tailored script for managers to offer discounts to high-risk users.
 4.  **Interactive Dashboard:** Allows non-technical stakeholders to adjust tenure, contract type, and monthly charges to simulate scenarios.
 
----
 
 ###  Strategic Insights (From Model)
 * **Contract Type** is the #1 predictor of churn. Moving a user from "Month-to-Month" to "One Year" reduces risk significantly.
@@ -54,4 +53,5 @@ A full-stack Data Science solution designed to predict customer churn and recomm
 
 ###  Author
 **Aswin Panengal**
-*Connect with me on LinkedIn!*
+[*Connect with me on LinkedIn!*](https://www.linkedin.com/in/aswinpanengal/)
+
