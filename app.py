@@ -20,8 +20,8 @@ except FileNotFoundError:
     st.stop()
 
 # --- 3. UI DESIGN ---
-st.title("🔮 Customer Retention Intelligence System")
-st.markdown("### 📊 Decision Support Tool for Managers")
+st.title(" Customer Retention Intelligence System")
+st.markdown("###  Decision Support Tool for Managers")
 st.write("Enter customer details below to predict churn risk and generate a retention strategy.")
 st.divider()
 
@@ -31,7 +31,7 @@ st.sidebar.header("Customer Profile")
 # Numerical Inputs
 tenure = st.sidebar.slider("Tenure (Months)", 0, 72, 12)
 monthly_charges = st.sidebar.number_input("Monthly Charges ($)", 0.0, 150.0, 70.0)
-total_charges = st.sidebar.number_input("Total Charges ($)", 0.0, 10000.0, 1000.0)
+
 
 # Categorical Inputs
 # Note: I fixed the spelling "Electeronic" -> "Electronic"
@@ -42,7 +42,7 @@ tech_support = st.sidebar.selectbox("Has Tech Support?", ["Yes", "No", "No inter
 paperless = st.sidebar.selectbox("Paperless Billing?", ["Yes", "No"])
 
 # --- 5. PREDICTION LOGIC ---
-if st.button("Analyze Risk 🚀", type="primary"):
+if st.button("Analyze Risk ", type="primary"):
     
     # A. Create a "Template" DataFrame with all columns set to 0
     input_df = pd.DataFrame(columns=features)
@@ -51,7 +51,7 @@ if st.button("Analyze Risk 🚀", type="primary"):
     # B. Fill in the Numerical Values (LOWERCASE to match your model)
     input_df['tenure'] = tenure
     input_df['monthlycharges'] = monthly_charges
-    input_df['totalcharges'] = total_charges
+    input_df['totalcharges'] = tenure * monthly_charges 
     
     # C. Manually Map the One-Hot Encoded Features
     # I added checks for both Capital and Lowercase to be 100% safe
@@ -105,25 +105,46 @@ if st.button("Analyze Risk 🚀", type="primary"):
     
     with col2:
         st.subheader("Risk Assessment")
-        if prediction:
-            st.error("🚨 HIGH RISK CUSTOMER")
-            st.write("This customer is likely to leave.")
+        
+        # --- LOGIC FOR TIERS ---
+        if prediction_prob < 0.3:
+            st.success("✅ LOW RISK")
+            st.write("Loyal customer. No action needed.")
+            risk_tier = "Low"
+            
+        elif prediction_prob >= 0.3 and prediction_prob < 0.6:
+            st.warning("⚠️ MODERATE RISK")
+            st.write("Showing signs of churn. Monitor closely.")
+            risk_tier = "Moderate"
+            
         else:
-            st.success("✅ SAFE CUSTOMER")
-            st.write("This customer is likely to stay.")
+            st.error("🚨 HIGH RISK")
+            st.write("Immediate action required!")
+            risk_tier = "High"
 
     # --- 8. STRATEGIC RECOMMENDATION ---
     st.divider()
     st.subheader("💡 AI Recommendation Strategy")
     
-    if prediction:
-        st.warning(f"⚠️ Action Required: Immediate Retention Offer")
+    if risk_tier == "High":
+        st.error(f"⚠️ **Action Required: Intervention**")
         st.markdown(f"""
         **Target:** Prevent revenue loss of **${monthly_charges*24:,.2f}** (Est. 2-Year LTV).
         
-        **Suggested Script for Manager:**
-        > *"Hi, I noticed you've been a valued customer for {tenure} months. 
+        **Strategy:**
+        > *"Hi, I noticed you've been a valued customer. 
         > To thank you for your loyalty, I can apply a **15% discount** to your bill if we switch you to a 1-Year plan today."*
         """)
-    else:
+        
+    elif risk_tier == "Moderate":
+        st.warning(f"👀 **Action Required: Soft Retention**")
+        st.markdown(f"""
+        **Target:** Improve satisfaction before risk increases.
+        
+        **Strategy:**
+        > *"Hi, just checking in to ensure your **{internet_service}** service is working perfectly. 
+        > We also have a complimentary tech support check-up available if you'd like to use it."*
+        """)
+        
+    else: # Low Risk
         st.info("No immediate action required. Maintain standard service quality.")
